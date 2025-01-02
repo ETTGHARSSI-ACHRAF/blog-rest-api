@@ -9,7 +9,7 @@ import java.util.List;
 @Service
 public interface PostSevice {
     PostDto createPost(PostDto postDto);
-    PostResponse findAllPost(int pageNo, int pageSize);
+    PostResponse findAllPost(int pageNo, int pageSize, String sortBy, String sortDir);
 
     PostDto findPostById(long id);
 

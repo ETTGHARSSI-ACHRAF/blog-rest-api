@@ -21,7 +21,7 @@ public class PostController {
         this.postSevice = postSevice;
     }
 
-    //creat blog post
+    //create blog post
     @PostMapping
     public ResponseEntity<PostDto> createPost(@RequestBody PostDto postDto){
         return new ResponseEntity<>(postSevice.createPost(postDto), HttpStatus.CREATED);

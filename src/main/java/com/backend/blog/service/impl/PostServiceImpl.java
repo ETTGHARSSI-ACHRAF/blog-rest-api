@@ -6,6 +6,7 @@ import com.backend.blog.payload.PostDto;
 import com.backend.blog.payload.PostResponse;
 import com.backend.blog.repository.PostRepository;
 import com.backend.blog.service.PostSevice;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,9 +20,12 @@ import java.util.stream.Collectors;
 @Service
 public class PostServiceImpl implements PostSevice {
 
+    private ModelMapper mapper;
+
     private PostRepository postRepository;
 
-    public PostServiceImpl(PostRepository postRepository) {
+    public PostServiceImpl(PostRepository postRepository, ModelMapper mapper){
+        this.mapper = mapper;
         this.postRepository = postRepository;
     }
 
@@ -84,19 +88,21 @@ public class PostServiceImpl implements PostSevice {
     }
 
     private PostDto mapToDto(Post post){
-        PostDto postDto = new PostDto();
-        postDto.setId(post.getId());
-        postDto.setTitle(post.getTitle());
-        postDto.setDescription(post.getDescription());
-        postDto.setContent(post.getContent());
+        PostDto postDto = mapper.map(post, PostDto.class);
+        // PostDto postDto = new PostDto();
+        // postDto.setId(post.getId());
+        // postDto.setTitle(post.getTitle());
+        // postDto.setDescription(post.getDescription());
+        // postDto.setContent(post.getContent());
         return postDto;
     }
 
     private Post mapToEntity(PostDto postDto){
-        Post post = new Post();
-        post.setTitle(postDto.getTitle());
-        post.setDescription(postDto.getDescription());
-        post.setContent(postDto.getContent());
+        Post post = mapper.map(postDto, Post.class);
+       // Post post = new Post();
+       // post.setTitle(postDto.getTitle());
+       // post.setDescription(postDto.getDescription());
+       // post.setContent(postDto.getContent());
         return post;
     }
 }

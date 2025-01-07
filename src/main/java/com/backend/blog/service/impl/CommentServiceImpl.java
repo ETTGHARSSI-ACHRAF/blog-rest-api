@@ -8,6 +8,7 @@ import com.backend.blog.payload.CommentDto;
 import com.backend.blog.repository.CommentRepository;
 import com.backend.blog.repository.PostRepository;
 import com.backend.blog.service.CommentService;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class CommentServiceImpl implements CommentService {
+
     private CommentRepository commentRepository;
     private PostRepository postRepository;
     public CommentServiceImpl(CommentRepository commentRepository, PostRepository postRepository) {
